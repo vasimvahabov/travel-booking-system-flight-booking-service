@@ -1,0 +1,71 @@
+databaseChangeLog:
+  - changeSet:
+      id: "1660779426"
+      author: "VASIM VAHABOV"
+      preConditions:
+        - onFail: MARK_RAN
+        - sequenceExists:
+            sequenceName: seq_flight_booking_id
+      changes:
+        - dropSequence:
+            sequenceName: seq_flight_booking_id
+  - changeSet:
+      id: "1692315596"
+      author: "VASIM VAHABOV"
+      changes:
+        - createSequence:
+            sequenceName: seq_flight_booking_id
+            startValue: 1
+            incrementBy: 1
+            cacheSize: 1
+
+  - changeSet:
+      id: "1629243741"
+      author: "VASIM VAHABOV"
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: flight_bookings
+      changes:
+        - dropTable:
+            tableName: flight_bookings
+
+  - changeSet:
+      id: "1629243201"
+      author: "VASIM VAHABOV"
+      changes:
+        - createTable:
+            tableName: flight_bookings
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_flight_bookings_id
+                    nullable: false
+              - column:
+                  name: version
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: flight_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: quantity
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date_time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_modified_date_time
+                  type: timestamp
+                  constraints:
+                    nullable: false
