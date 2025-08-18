@@ -16,19 +16,41 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+    lombokVersion = '1.18.38'
+    mapstructVersion = '1.6.3'
+}
+
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	runtimeOnly 'org.postgresql:postgresql'
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    implementation 'org.liquibase:liquibase-core'
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    runtimeOnly 'org.postgresql:postgresql'
 	runtimeOnly 'org.postgresql:r2dbc-postgresql'
+    runtimeOnly 'org.springframework:spring-jdbc'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.testcontainers:junit-jupiter'
 	testImplementation 'org.testcontainers:postgresql'
 	testImplementation 'org.testcontainers:r2dbc'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
 }
 
 tasks.named('test') {
