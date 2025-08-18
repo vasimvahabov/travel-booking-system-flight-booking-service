@@ -55,8 +55,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: quantity
-                  type: integer
+                  name: user_id
+                  type: bigint
                   constraints:
                     nullable: false
               - column:
