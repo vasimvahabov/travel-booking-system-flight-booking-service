@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: flight-booking-service
+  lifecycle:
+    timeout-per-shutdown-phase: 15s
+  r2dbc:
+    username: postgres
+    password: 6eEvI63t20
+    url: r2dbc:postgresql://postgres-travel-booking-system:5432/flight_bookings
+    pool:
+      max-create-connection-time: 2s
+      initial-size: 5
+      max-size: 10
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+server:
+  port: 7788
+  shutdown: graceful
+  netty:
+    connection-timeout: 2s
+    idle-timeout: 15s
