@@ -6,19 +6,16 @@ spring:
   r2dbc:
     username: user_postgres
     password: 6eEvI63t20
-    url: r2dbc:postgresql://postgres-travel-booking-system:5432/flight_bookings
+    url: r2dbc:postgresql://localhost:5432/flight_bookings
     pool:
       max-create-connection-time: 2s
       initial-size: 5
       max-size: 10
-#  jpa:
-#    hibernate:
-#      ddl-auto: validate
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yml
     user: ${spring.r2dbc.username}
     password: ${spring.r2dbc.password}
-    url: jdbc:postgresql://postgres-travel-booking-system:5432/flight_bookings
+    url: jdbc:postgresql://localhost:5432/flight_bookings
 
 server:
   port: 7788
@@ -26,3 +23,6 @@ server:
   netty:
     connection-timeout: 2s
     idle-timeout: 15s
+
+travel-booking-system:
+  flight-service-uri: "http://localhost:8899"
