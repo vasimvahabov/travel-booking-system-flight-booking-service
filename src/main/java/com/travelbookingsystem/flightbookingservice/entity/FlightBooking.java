@@ -1,18 +1,22 @@
 package com.travelbookingsystem.flightbookingservice.entity;
 
 import com.travelbookingsystem.flightbookingservice.entity.constant.FlightBookingStatus;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Version;
+import org.springframework.data.relational.core.mapping.Sequence;
 import org.springframework.data.relational.core.mapping.Table;
 import java.time.Instant;
 
 @Setter
 @Getter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table("flight_bookings")
@@ -20,15 +24,15 @@ import java.time.Instant;
 public class FlightBooking {
 
     @Id
+    @Sequence(sequence = "seq_flight_booking_id")
     Long id;
 
     @Version
-    @Builder.Default
-    Integer version = 0;
-
-    Long flightId;
+    Integer version;
 
     Long userId;
+
+    String flightNumber;
 
     FlightBookingStatus status;
 
@@ -37,6 +41,7 @@ public class FlightBooking {
     Instant createdDateTime = Instant.now();
 
     @LastModifiedDate
+    @Builder.Default
     Instant lastModifiedDateTime = Instant.now();
 
 }

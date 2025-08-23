@@ -14,10 +14,10 @@ public class FlightBookingRequest {
 
     Long id;
 
-    @NotNull(message = "The flight id cannot be null!")
-    Long flightId;
-
     @NotNull(message = "The user id cannot be null!")
     Long userId;
+
+    @NotNull(message = "The flight number cannot be null!")
+    String flightNumber;
 
 }

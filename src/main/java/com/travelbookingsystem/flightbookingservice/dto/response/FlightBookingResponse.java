@@ -14,9 +14,9 @@ public class FlightBookingResponse {
 
     Long id;
 
-    Long flightId;
-
     Long userId;
+
+    String flightNumber;
 
     FlightBookingStatus status;
 

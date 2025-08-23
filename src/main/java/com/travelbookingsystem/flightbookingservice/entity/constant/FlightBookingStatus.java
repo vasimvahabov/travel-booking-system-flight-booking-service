@@ -1,9 +1,12 @@
 package com.travelbookingsystem.flightbookingservice.entity.constant;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import java.util.Arrays;
 
+@Getter
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public enum FlightBookingStatus {
@@ -14,5 +17,12 @@ public enum FlightBookingStatus {
 
     int value;
     String description;
+
+    public static FlightBookingStatus fromValue(int value) {
+        return Arrays.stream(FlightBookingStatus.values())
+                .findFirst()
+                .orElseThrow(() ->
+                        new RuntimeException("FlightBookingStatus doesn't exist with value %s".formatted(value)));
+    }
 
 }
