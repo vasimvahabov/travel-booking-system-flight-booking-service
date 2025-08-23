@@ -19,6 +19,8 @@ repositories {
 ext {
     lombokVersion = '1.18.38'
     mapstructVersion = '1.6.3'
+    lombokMapstructBindingVersion = '0.2.0'
+    hibernateProcessorVersion = '7.1.0.Final'
 }
 
 dependencies {
@@ -28,11 +30,16 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     implementation 'org.liquibase:liquibase-core'
+    implementation "org.hibernate:hibernate-jpamodelgen:$hibernateProcessorVersion"
 
     compileOnly "org.projectlombok:lombok:$lombokVersion"
 
-    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+//    we need this dependency to be sure that lombok runs first
+//    order of the annotationProcessor matters
+//    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+//    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
     runtimeOnly 'org.postgresql:postgresql'
 	runtimeOnly 'org.postgresql:r2dbc-postgresql'
@@ -45,11 +52,11 @@ dependencies {
 	testImplementation 'org.testcontainers:postgresql'
 	testImplementation 'org.testcontainers:r2dbc'
 
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
     testCompileOnly "org.projectlombok:lombok:$lombokVersion"
 
-    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
-
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
 
 }
 
