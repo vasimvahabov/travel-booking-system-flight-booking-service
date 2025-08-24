@@ -20,7 +20,9 @@ public enum FlightBookingStatus {
 
     public static FlightBookingStatus fromValue(int value) {
         return Arrays.stream(FlightBookingStatus.values())
-                .findFirst()
+                .filter(
+                        status -> status.getValue() == value
+                ).findFirst()
                 .orElseThrow(() ->
                         new RuntimeException("FlightBookingStatus doesn't exist with value %s".formatted(value)));
     }
