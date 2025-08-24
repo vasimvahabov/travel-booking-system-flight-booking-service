@@ -33,14 +33,13 @@ public class FlightBookingServiceImpl implements FlightBookingService {
         return flightServiceClient
                 .findByNumber(request.getFlightNumber())
                 .map(response ->
-                        flightBookingMapper.requestToEntity(request, FlightBookingStatus.CONFIRMED)
+                     flightBookingMapper.requestToEntity(request, FlightBookingStatus.CONFIRMED)
                 )
-                .switchIfEmpty(Mono.defer(() -> Mono.just(
-                        flightBookingMapper.requestToEntity(request, FlightBookingStatus.CANCELED)))
-                ).flatMap(flightBooking ->
-                        flightBookingRepository.save(flightBooking)
-                                .map(flightBookingMapper::entityToResponse)
-                );
+                .switchIfEmpty(Mono.defer(
+                        () -> Mono.just(flightBookingMapper.requestToEntity(request, FlightBookingStatus.CANCELED))
+                ))
+                .flatMap(flightBookingRepository::save)
+                .map(flightBookingMapper::entityToResponse);
     }
 
 }
