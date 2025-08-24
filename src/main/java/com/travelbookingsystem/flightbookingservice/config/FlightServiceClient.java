@@ -1,4 +1,4 @@
-package com.travelbookingsystem.flightbookingservice.flightservice.client;
+package com.travelbookingsystem.flightbookingservice.config;
 
 import com.travelbookingsystem.flightbookingservice.flightservice.dto.response.FlightResponse;
 import lombok.AccessLevel;
