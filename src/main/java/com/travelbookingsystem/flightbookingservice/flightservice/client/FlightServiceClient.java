@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 
 import static com.travelbookingsystem.flightbookingservice.constant.ApplicationConstants.*;
@@ -22,7 +23,8 @@ public class FlightServiceClient {
                 .get()
                 .uri(String.format("%s/%s", FLIGHT_SERVICE_ROOT_API, number))
                 .retrieve()
-                .bodyToMono(FlightResponse.class);
+                .bodyToMono(FlightResponse.class)
+                .onErrorResume(WebClientResponseException.NotFound.class, ex -> Mono.empty());
     }
 
 }
