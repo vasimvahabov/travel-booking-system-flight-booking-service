@@ -14,10 +14,10 @@ public class FlightBookingStatusConverter {
     @Bean
     public R2dbcCustomConversions r2dbcCustomConversions(ConnectionFactory connectionFactory) {
         var dialect = DialectResolver.getDialect(connectionFactory);
-        var list = new ArrayList<Converter<?, ?>>();
-        list.add(new FlightBookingStatusConverterReading());
-        list.add(new FlightBookingStatusConverterWriting());
-        return R2dbcCustomConversions.of(dialect, list);
+        var converters = new ArrayList<Converter<?, ?>>();
+        converters.add(new FlightBookingStatusConverterReading());
+        converters.add(new FlightBookingStatusConverterWriting());
+        return R2dbcCustomConversions.of(dialect, converters);
     }
 
 
