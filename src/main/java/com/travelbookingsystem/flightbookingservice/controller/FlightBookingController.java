@@ -8,7 +8,6 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -22,13 +21,15 @@ public class FlightBookingController {
     FlightBookingService flightBookingService;
 
     @GetMapping
-    public ResponseEntity<Flux<FlightBookingResponse>> findAll() {
-        return ResponseEntity.ok(flightBookingService.findAll());
+    @ResponseStatus(HttpStatus.OK)
+    public Flux<FlightBookingResponse> findAll() {
+        return flightBookingService.findAll();
     }
 
     @PostMapping
-    public ResponseEntity<Mono<FlightBookingResponse>> create(@RequestBody @Valid FlightBookingRequest request) {
-        return new ResponseEntity<>(flightBookingService.create(request), HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public Mono<FlightBookingResponse> create(@RequestBody @Valid FlightBookingRequest request) {
+        return flightBookingService.create(request);
     }
 
 }
