@@ -1,4 +1,4 @@
-package com.travelbookingsystem.flightbookingservice.config;
+package com.travelbookingsystem.flightbookingservice.config.flightservice;
 
 import com.travelbookingsystem.flightbookingservice.flightservice.dto.response.FlightResponse;
 import lombok.AccessLevel;
@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
+import reactor.util.retry.Retry;
+import java.time.Duration;
 
 import static com.travelbookingsystem.flightbookingservice.constant.ApplicationConstants.*;
 
@@ -17,6 +19,7 @@ import static com.travelbookingsystem.flightbookingservice.constant.ApplicationC
 public class FlightServiceClient {
 
     WebClient webClient;
+    FlightServiceClientConfigProperties properties;
 
     public Mono<FlightResponse> findByNumber(String number) {
         return webClient
@@ -24,7 +27,12 @@ public class FlightServiceClient {
                 .uri(String.format("%s/%s", FLIGHT_SERVICE_ROOT_API, number))
                 .retrieve()
                 .bodyToMono(FlightResponse.class)
-                .onErrorResume(WebClientResponseException.NotFound.class, ex -> Mono.empty());
+                .onErrorResume(WebClientResponseException.NotFound.class, ex -> Mono.empty())
+                .timeout(Duration.ofSeconds(properties.getTimeout()), Mono.empty())
+                .retryWhen(
+                        Retry.backoff(properties.getBackoffAttempt(),
+                                Duration.ofSeconds(properties.getBackoffMin()))
+                );
     }
 
 }

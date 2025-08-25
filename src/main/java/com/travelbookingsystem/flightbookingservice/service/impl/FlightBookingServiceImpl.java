@@ -3,7 +3,7 @@ package com.travelbookingsystem.flightbookingservice.service.impl;
 import com.travelbookingsystem.flightbookingservice.dto.request.FlightBookingRequest;
 import com.travelbookingsystem.flightbookingservice.dto.response.FlightBookingResponse;
 import com.travelbookingsystem.flightbookingservice.entity.constant.FlightBookingStatus;
-import com.travelbookingsystem.flightbookingservice.config.FlightServiceClient;
+import com.travelbookingsystem.flightbookingservice.config.flightservice.FlightServiceClient;
 import com.travelbookingsystem.flightbookingservice.mapper.FlightBookingMapper;
 import com.travelbookingsystem.flightbookingservice.repository.FlightBookingRepository;
 import com.travelbookingsystem.flightbookingservice.service.FlightBookingService;

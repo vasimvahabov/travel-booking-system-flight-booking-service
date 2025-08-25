@@ -1,16 +1,16 @@
-package com.travelbookingsystem.flightbookingservice.config;
+package com.travelbookingsystem.flightbookingservice.config.flightservice;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
-public class ClientConfig {
+public class FlightServiceClientConfig {
 
     @Bean
-    WebClient webClient(ClientConfigProperties properties,
+    WebClient webClient(FlightServiceClientConfigProperties properties,
                         WebClient.Builder builder) {
-        return builder.baseUrl(properties.getFlightServiceUri()).build();
+        return builder.baseUrl(properties.getUri()).build();
     }
 
 }
