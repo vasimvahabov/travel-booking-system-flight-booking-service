@@ -1,6 +1,6 @@
-package com.travelbookingsystem.flightbookingservice.travelbookingsystem.flightservice.config;
+package com.travelbookingsystem.flightbookingservice.config.flightservice;
 
-import com.travelbookingsystem.flightbookingservice.travelbookingsystem.config.TravelBookingSystemConfigProperties;
+import com.travelbookingsystem.flightbookingservice.config.TravelBookingSystemConfigProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;

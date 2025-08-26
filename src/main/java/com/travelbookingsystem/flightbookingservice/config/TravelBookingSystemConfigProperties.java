@@ -1,7 +1,7 @@
-package com.travelbookingsystem.flightbookingservice.travelbookingsystem.config;
+package com.travelbookingsystem.flightbookingservice.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.travelbookingsystem.flightbookingservice.travelbookingsystem.flightservice.config.FlightServiceConfigProperties;
+import com.travelbookingsystem.flightbookingservice.config.flightservice.FlightServiceConfigProperties;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

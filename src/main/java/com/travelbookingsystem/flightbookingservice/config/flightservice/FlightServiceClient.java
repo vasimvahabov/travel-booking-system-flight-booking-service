@@ -1,6 +1,6 @@
-package com.travelbookingsystem.flightbookingservice.travelbookingsystem.flightservice.config;
+package com.travelbookingsystem.flightbookingservice.config.flightservice;
 
-import com.travelbookingsystem.flightbookingservice.travelbookingsystem.flightservice.dto.response.FlightResponse;
+import com.travelbookingsystem.flightbookingservice.flightservice.dto.response.FlightResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
