@@ -27,12 +27,13 @@ public class FlightServiceClient {
                 .uri(String.format("%s/%s", FLIGHT_SERVICE_ROOT_API, number))
                 .retrieve()
                 .bodyToMono(FlightResponse.class)
-                .onErrorResume(WebClientResponseException.NotFound.class, ex -> Mono.empty())
                 .timeout(Duration.ofSeconds(properties.getTimeout()), Mono.empty())
+                .onErrorResume(WebClientResponseException.NotFound.class, exception -> Mono.empty())
                 .retryWhen(
                         Retry.backoff(properties.getBackoffAttempt(),
                                 Duration.ofSeconds(properties.getBackoffMin()))
-                );
+                )
+                .onErrorResume(Exception.class, exception -> Mono.empty());
     }
 
 }
