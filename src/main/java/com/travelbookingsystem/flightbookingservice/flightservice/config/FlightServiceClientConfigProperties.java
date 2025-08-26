@@ -1,4 +1,4 @@
-package com.travelbookingsystem.flightbookingservice.config.flightservice;
+package com.travelbookingsystem.flightbookingservice.flightservice.config;
 
 import lombok.AccessLevel;
 import lombok.Getter;

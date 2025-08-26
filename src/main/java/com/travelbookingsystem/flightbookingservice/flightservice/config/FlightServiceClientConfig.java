@@ -1,4 +1,4 @@
-package com.travelbookingsystem.flightbookingservice.config.flightservice;
+package com.travelbookingsystem.flightbookingservice.flightservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
