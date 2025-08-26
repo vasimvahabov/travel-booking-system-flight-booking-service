@@ -27,6 +27,8 @@ server:
 travel-booking-system:
   flight-service:
     uri: "http://localhost:8899"
-    timeout: 3
-    backoff-attempt: 3
-    backoff-min: 100
+    root-api: "/api/v1/flights"
+    client:
+      timeout: 3
+      backoff-attempt: 3
+      backoff-min: 100

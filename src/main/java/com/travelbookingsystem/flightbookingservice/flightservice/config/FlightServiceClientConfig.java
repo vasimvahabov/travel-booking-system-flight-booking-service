@@ -8,7 +8,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class FlightServiceClientConfig {
 
     @Bean
-    WebClient webClient(FlightServiceClientConfigProperties properties,
+    WebClient webClient(FlightServiceConfigProperties properties,
                         WebClient.Builder builder) {
         return builder.baseUrl(properties.getUri()).build();
     }

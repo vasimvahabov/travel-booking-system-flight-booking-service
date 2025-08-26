@@ -10,14 +10,24 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ConfigurationProperties(prefix = "travel-booking-system.flight-service")
-public class FlightServiceClientConfigProperties {
-
-    Long timeout;
-
-    Long backoffAttempt;
-
-    Long backoffMin;
+public class FlightServiceConfigProperties {
 
     String uri;
+
+    String rootApi;
+
+    Client client = new Client();
+
+    @Getter
+    @Setter
+    static class Client {
+
+        Long timeout;
+
+        Long backoffAttempt;
+
+        Long backoffMin;
+
+    }
 
 }

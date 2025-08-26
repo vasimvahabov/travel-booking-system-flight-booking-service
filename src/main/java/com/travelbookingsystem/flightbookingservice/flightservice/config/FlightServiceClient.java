@@ -11,27 +11,25 @@ import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
 import java.time.Duration;
 
-import static com.travelbookingsystem.flightbookingservice.constant.ApplicationConstants.*;
-
 @Component
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class FlightServiceClient {
 
     WebClient webClient;
-    FlightServiceClientConfigProperties properties;
+    FlightServiceConfigProperties properties;
 
     public Mono<FlightResponse> findByNumber(String number) {
         return webClient
                 .get()
-                .uri(String.format("%s/%s", FLIGHT_SERVICE_ROOT_API, number))
+                .uri(String.format("%s/%s", properties.getRootApi(), number))
                 .retrieve()
                 .bodyToMono(FlightResponse.class)
-                .timeout(Duration.ofSeconds(properties.getTimeout()), Mono.empty())
+                .timeout(Duration.ofSeconds(properties.getClient().getTimeout()), Mono.empty())
                 .onErrorResume(WebClientResponseException.NotFound.class, exception -> Mono.empty())
                 .retryWhen(
-                        Retry.backoff(properties.getBackoffAttempt(),
-                                Duration.ofSeconds(properties.getBackoffMin()))
+                        Retry.backoff(properties.getClient().getBackoffAttempt(),
+                                Duration.ofSeconds(properties.getClient().getBackoffMin()))
                 )
                 .onErrorResume(Exception.class, exception -> Mono.empty());
     }
