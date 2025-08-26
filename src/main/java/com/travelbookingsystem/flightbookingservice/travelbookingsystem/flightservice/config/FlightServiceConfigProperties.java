@@ -1,4 +1,4 @@
-package com.travelbookingsystem.flightbookingservice.flightservice.config;
+package com.travelbookingsystem.flightbookingservice.travelbookingsystem.flightservice.config;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -16,11 +16,12 @@ public class FlightServiceConfigProperties {
 
     String rootApi;
 
+    @Setter(AccessLevel.NONE)
     Client client = new Client();
 
     @Getter
     @Setter
-    static class Client {
+    public static class Client {
 
         Long timeout;
 

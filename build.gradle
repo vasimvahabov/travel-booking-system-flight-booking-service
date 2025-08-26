@@ -21,6 +21,7 @@ ext {
     mapstructVersion = '1.6.3'
     lombokMapstructBindingVersion = '0.2.0'
     hibernateProcessorVersion = '7.1.0.Final'
+    snakeyamlVersion = '2.4'
 }
 
 dependencies {
@@ -51,6 +52,7 @@ dependencies {
 	testImplementation 'org.testcontainers:junit-jupiter'
 	testImplementation 'org.testcontainers:postgresql'
 	testImplementation 'org.testcontainers:r2dbc'
+    testImplementation "org.yaml:snakeyaml:$snakeyamlVersion"
 
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
