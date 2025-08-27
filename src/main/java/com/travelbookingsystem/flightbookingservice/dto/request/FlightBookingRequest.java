@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @Builder
@@ -19,5 +21,16 @@ public class FlightBookingRequest {
 
     @NotNull(message = "The flight number cannot be null!")
     String flightNumber;
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof FlightBookingRequest that)) return false;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 
 }
