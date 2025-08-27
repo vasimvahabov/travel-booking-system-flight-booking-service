@@ -11,9 +11,7 @@ public class FlightServiceClientConfig {
     @Bean
     WebClient webClient(TravelBookingSystemConfigProperties properties,
                         WebClient.Builder builder) {
-        return builder.baseUrl(
-                properties.getFlightService().getUri()
-        ).build();
+        return builder.baseUrl(properties.getFlightService().getUri()).build();
     }
 
 }

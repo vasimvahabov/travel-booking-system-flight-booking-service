@@ -21,6 +21,7 @@ ext {
     mapstructVersion = '1.6.3'
     lombokMapstructBindingVersion = '0.2.0'
     hibernateProcessorVersion = '7.1.0.Final'
+    mockwebserverVersion = '5.1.0'
     snakeyamlVersion = '2.4'
 }
 
@@ -53,6 +54,7 @@ dependencies {
 	testImplementation 'org.testcontainers:postgresql'
 	testImplementation 'org.testcontainers:r2dbc'
     testImplementation "org.yaml:snakeyaml:$snakeyamlVersion"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$mockwebserverVersion"
 
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 

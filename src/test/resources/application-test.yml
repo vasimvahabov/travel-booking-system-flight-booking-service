@@ -1,0 +1,8 @@
+travel-booking-system:
+  flight-service:
+    root-api: "/api/v1/flights"
+    uri: "http://localhost:8899"
+    client:
+      timeout: 3
+      backoff-attempt: 3
+      backoff-min: 100
