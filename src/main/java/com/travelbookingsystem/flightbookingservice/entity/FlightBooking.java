@@ -1,8 +1,6 @@
 package com.travelbookingsystem.flightbookingservice.entity;
 
 import com.travelbookingsystem.flightbookingservice.entity.constant.FlightBookingStatus;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.CreatedDate;
