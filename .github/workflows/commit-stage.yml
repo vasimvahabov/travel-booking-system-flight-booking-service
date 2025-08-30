@@ -68,7 +68,7 @@ jobs:
         uses: anchore/scan-action@v4
         id: scan
         with:
-          image: ${{ env.IMAGE_NAME_FLIGHT_BOOKING_SERVICE }}:${{ env.IMAGE_VERSION_FLIGHT_SERVICE }}
+          image: ${{ env.IMAGE_NAME_FLIGHT_BOOKING_SERVICE }}:${{ env.IMAGE_VERSION_FLIGHT_BOOKING_SERVICE }}
           fail-build: false
           severity-cutoff: high
       - name: Upload the vulnerability report
