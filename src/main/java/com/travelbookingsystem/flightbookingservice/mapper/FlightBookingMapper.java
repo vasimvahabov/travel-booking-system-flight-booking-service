@@ -7,6 +7,7 @@ import com.travelbookingsystem.flightbookingservice.entity.constant.FlightBookin
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface FlightBookingMapper {
@@ -20,5 +21,14 @@ public interface FlightBookingMapper {
     @Mapping(target = "flightNumber", source = "request.flightNumber")
     @Mapping(target = "userId", source = "request.userId")
     FlightBooking requestToEntity(FlightBookingRequest request, FlightBookingStatus status);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "version", ignore = true)
+    @Mapping(target = "createdDateTime", ignore = true)
+    @Mapping(target = "lastModifiedDateTime", ignore = true)
+    @Mapping(target = "flightNumber", ignore = true)
+    @Mapping(target = "userId", ignore = true)
+    @Mapping(target = "status", source = "status")
+    FlightBooking updateEntity(@MappingTarget FlightBooking flightBooking, FlightBookingStatus status);
 
 }

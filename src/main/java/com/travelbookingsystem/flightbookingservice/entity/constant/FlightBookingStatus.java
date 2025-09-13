@@ -11,9 +11,9 @@ import java.util.Arrays;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public enum FlightBookingStatus {
 
-    PENDING(1, "Pending"),
-    CONFIRMED(2, "Confirmed"),
-    CANCELED(3, "Cancelled");
+    CANCELED(1, "Cancelled"),
+    PENDING(2, "Pending"),
+    CONFIRMED(3, "Confirmed");
 
     int value;
     String description;
