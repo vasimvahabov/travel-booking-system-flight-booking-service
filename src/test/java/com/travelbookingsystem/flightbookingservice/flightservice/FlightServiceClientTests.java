@@ -79,7 +79,7 @@ class FlightServiceClientTests {
     }
 
     @Test
-    void whenBookNotExistsReturnEmpty() {
+    void whenFlightNotExistsReturnEmpty() {
         var flightNumber = "AA566";
         var mockResponse = new MockResponse()
                 .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
