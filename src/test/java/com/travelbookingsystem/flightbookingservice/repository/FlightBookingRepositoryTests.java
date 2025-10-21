@@ -34,18 +34,16 @@ class FlightBookingRepositoryTests {
 
     @DynamicPropertySource
     private static void postgresProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.r2dbc.url", FlightBookingRepositoryTests::r2dbcUrl);
-        registry.add("spring.r2dbc.username", postgresContainer::getUsername);
-        registry.add("spring.r2dbc.password", postgresContainer::getPassword);
-        registry.add("spring.liquibase.url", postgresContainer::getJdbcUrl);
-    }
-
-    private static String r2dbcUrl() {
-        return "r2dbc:postgresql://%s:%s/%s".formatted(
+        var r2dbcUrl = "r2dbc:postgresql://%s:%s/%s".formatted(
                 postgresContainer.getHost(),
                 postgresContainer.getMappedPort(PostgreSQLContainer.POSTGRESQL_PORT),
                 postgresContainer.getDatabaseName()
         );
+
+        registry.add("spring.r2dbc.url", () -> r2dbcUrl);
+        registry.add("spring.r2dbc.username", postgresContainer::getUsername);
+        registry.add("spring.r2dbc.password", postgresContainer::getPassword);
+        registry.add("spring.liquibase.url", postgresContainer::getJdbcUrl);
     }
 
     @Test
