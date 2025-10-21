@@ -31,13 +31,17 @@ spring:
     user: ${spring.r2dbc.username}
     password: ${spring.r2dbc.password}
     url: jdbc:postgresql://localhost:5432/flight_bookings
-
   rabbitmq:
     host: localhost
     port: 5672
     username: user_rabbitmq
     password: 9BtVYmvlEp
     connection-timeout: 5s
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${JWT_ISSUER_URI:http://localhost:4455/realms/travel-booking-system}
 
 server:
   port: 7788
