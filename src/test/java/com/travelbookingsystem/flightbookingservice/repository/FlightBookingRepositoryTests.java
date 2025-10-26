@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.r2dbc.DataR2dbcTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
@@ -19,11 +20,15 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 import reactor.test.StepVerifier;
 
-@DataR2dbcTest
+@DataR2dbcTest(properties = {
+        "logging.level.io.r2dbc.postgresql=DEBUG"
+})
 @Testcontainers
 @Import({AuditConfig.class, FlightBookingStatusConverter.class, FlightBookingSequenceCallback.class})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 class FlightBookingRepositoryTests {
+
+    final String USER_ID = "182a5a6e-918b-4110-ba0c-8300f6e90662";
 
     @Container
     static PostgreSQLContainer<?> postgresContainer
@@ -47,6 +52,7 @@ class FlightBookingRepositoryTests {
     }
 
     @Test
+    @WithMockUser(USER_ID)
     void createCancelledFlightBooking() {
         var cancelled = FlightBooking.builder()
                 .flightNumber("CC333")
