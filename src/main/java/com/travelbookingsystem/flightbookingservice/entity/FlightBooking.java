@@ -3,13 +3,11 @@ package com.travelbookingsystem.flightbookingservice.entity;
 import com.travelbookingsystem.flightbookingservice.entity.constant.FlightBookingStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.annotation.Version;
+import org.springframework.data.annotation.*;
 import org.springframework.data.relational.core.mapping.Sequence;
 import org.springframework.data.relational.core.mapping.Table;
 import java.time.Instant;
+import java.util.UUID;
 
 @Setter
 @Getter
@@ -35,11 +33,15 @@ public class FlightBooking {
     FlightBookingStatus status;
 
     @CreatedDate
-    @Builder.Default
-    Instant createdDateTime = Instant.now();
+    Instant createdDateTime;
 
     @LastModifiedDate
-    @Builder.Default
-    Instant lastModifiedDateTime = Instant.now();
+    Instant lastModifiedDateTime;
+
+    @CreatedBy
+    UUID createdBy;
+
+    @LastModifiedBy
+    UUID lastModifiedBy;
 
 }

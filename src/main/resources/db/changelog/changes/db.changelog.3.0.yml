@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: "1737607307"
+      author: "VASIM VAHABOV"
+      changes:
+        - addDefaultValue:
+            tableName: flight_bookings
+            columnName: created_date_time
+            columnDataType: timestamp
+            defaultValueComputed: 'CURRENT_TIMESTAMP'
+        - addDefaultValue:
+            tableName: flight_bookings
+            columnName: last_modified_date_time
+            columnDataType: timestamp
+            defaultValueComputed: 'CURRENT_TIMESTAMP'

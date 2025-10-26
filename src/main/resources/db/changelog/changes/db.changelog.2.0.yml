@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: "1737636107"
+      author: "VASIM VAHABOV"
+      changes:
+        - addColumn:
+            tableName: flight_bookings
+            columns:
+              - column:
+                  name: created_by
+                  type: uuid
+                  defaultValueComputed: "'00000000-0000-0000-0000-000000000000'"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_modified_by
+                  type: uuid
+                  defaultValueComputed: "'00000000-0000-0000-0000-000000000000'"
+                  constraints:
+                    nullable: false
