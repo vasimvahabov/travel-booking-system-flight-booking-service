@@ -19,6 +19,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 import reactor.test.StepVerifier;
+import java.util.UUID;
 
 @DataR2dbcTest(properties = {
         "logging.level.io.r2dbc.postgresql=DEBUG"
@@ -29,6 +30,7 @@ import reactor.test.StepVerifier;
 class FlightBookingRepositoryTests {
 
     final String USER_ID = "182a5a6e-918b-4110-ba0c-8300f6e90662";
+    final UUID ZERO_UUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
 
     @Container
     static PostgreSQLContainer<?> postgresContainer
@@ -52,8 +54,25 @@ class FlightBookingRepositoryTests {
     }
 
     @Test
+    void givenNoAuthenticatedContext_whenCreatingFlightBooking_thenCreatedByAndModifiedByAreZeroUuid() {
+        var cancelled = FlightBooking.builder()
+                .flightNumber("CC333")
+                .status(FlightBookingStatus.CANCELED)
+                .userId(9888L).build();
+
+        var monoCancelled = flightBookingRepository.save(cancelled)
+                .flatMap(flightBooking -> flightBookingRepository.findById(flightBooking.getId()));
+
+        StepVerifier.create(monoCancelled)
+                .expectNextMatches(flightBooking ->
+                        ZERO_UUID.equals(flightBooking.getCreatedBy())
+                                && ZERO_UUID.equals(flightBooking.getLastModifiedBy()))
+                .verifyComplete();
+    }
+
+    @Test
     @WithMockUser(USER_ID)
-    void createCancelledFlightBooking() {
+    void givenAuthenticatedContext_whenCreatingFlightBooking_thenCreatedByAndModifiedBySetToUserUuid() {
         var cancelled = FlightBooking.builder()
                 .flightNumber("CC333")
                 .status(FlightBookingStatus.CANCELED)
