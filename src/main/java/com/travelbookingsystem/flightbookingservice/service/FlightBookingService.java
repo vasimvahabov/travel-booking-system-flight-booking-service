@@ -5,10 +5,11 @@ import com.travelbookingsystem.flightbookingservice.dto.response.FlightBookingRe
 import com.travelbookingsystem.flightbookingservice.event.messages.FlightBookingPaymentProcessedMessage;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import java.util.UUID;
 
 public interface FlightBookingService {
 
-    Flux<FlightBookingResponse> findAll();
+    Flux<FlightBookingResponse> findAllCreatedBy(UUID user);
 
     Mono<FlightBookingResponse> create(FlightBookingRequest request);
 

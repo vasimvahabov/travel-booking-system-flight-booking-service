@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import java.util.UUID;
 
 import static com.travelbookingsystem.flightbookingservice.entity.constant.FlightBookingStatus.*;
 
@@ -32,8 +33,10 @@ public class FlightBookingServiceImpl implements FlightBookingService {
     StreamBridge streamBridge;
 
     @Override
-    public Flux<FlightBookingResponse> findAll() {
-        return flightBookingRepository.findAll().map(flightBookingMapper::entityToResponse);
+    public Flux<FlightBookingResponse> findAllCreatedBy(UUID user) {
+        return flightBookingRepository
+                .findAllByCreatedBy(user)
+                .map(flightBookingMapper::entityToResponse);
     }
 
     @Override
