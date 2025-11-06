@@ -41,10 +41,10 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${JWT_ISSUER_URI:http://localhost:4455/realms/travel-booking-system}
+          issuer-uri: ${JWT_ISSUER_URI:http://localhost:8080/realms/travel-booking-system}
 
 server:
-  port: 7788
+  port: 8002
   shutdown: graceful
   netty:
     connection-timeout: 2s
@@ -52,7 +52,7 @@ server:
 
 travel-booking-system:
   flight-service:
-    uri: "http://localhost:8899"
+    uri: "http://localhost:8001"
     root-api: "/api/v1/flights"
     client:
       timeout: 3
