@@ -1,6 +1,9 @@
 name: Commit Stage
 on: push
 
+env:
+  IMAGE_VERSION_FLIGHT_BOOKING_SERVICE: ${{ github.sha }}
+
 jobs:
   build:
     name: Build and Test
@@ -82,5 +85,11 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish the container image
+      - name: Publish the container image (Git Commit Hash)
         run: docker push ${{ env.IMAGE_NAME_FLIGHT_BOOKING_SERVICE }}:${{ env.IMAGE_VERSION_FLIGHT_BOOKING_SERVICE }}
+      - name: Publish the container image (latest)
+        run: |
+          docker tag \
+              ${{ env.IMAGE_NAME_FLIGHT_BOOKING_SERVICE }}:${{ env.IMAGE_VERSION_FLIGHT_BOOKING_SERVICE }} \
+              ${{ env.IMAGE_NAME_FLIGHT_BOOKING_SERVICE }}:latest
+          docker push ${{ env.IMAGE_NAME_FLIGHT_BOOKING_SERVICE }}:latest
